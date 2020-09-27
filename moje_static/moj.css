@@ -1,0 +1,16 @@
+.left-all {
+  text-align: left;
+}
+.center-all {
+  text-align: center;
+}
+.film_plakat{
+    width: 150px;
+    float: left;
+    margin-right: 15px;
+    }
+
+.center_main {
+    margin: auto;
+    width: 50%;
+}

@@ -1,0 +1,35 @@
+{% extends 'glowny.html' %}
+{% load bootstrap %}
+{% block tytul %} d/u? {% endblock %}
+
+{% block strona %}
+user id:{{user.id}}
+film author id : {{film.author.id}}
+<div class="center-all">
+    <div class="card text-center">
+
+
+            {% if nowy %}
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form|bootstrap }}
+                        <button class="btn btn-primary" type="submit">Dodaj Film</button>
+                </form>
+            {% else %}
+
+                {% if user.id == film.author.id %}
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form|bootstrap }}
+                            <button class="btn btn-primary" type="submit">Zapisz</button>
+                    </form>
+                {% else %}
+                    <p class="card-text">Nie masz uprawnień!</p>
+                    <a class="btn btn-danger" href="{% url 'wszystkie' %}" role="button">Cofnij</a>
+                {% endif %}
+            {% endif %}
+    </div>
+</div>
+
+
+{% endblock %}
