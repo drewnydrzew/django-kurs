@@ -16,6 +16,11 @@ class Film(models.Model):
     premiera = models.DateField(null=True, blank=True)
     imbd_rating = models.DecimalField(max_digits=4, decimal_places=2, null=True, blank=True)
     plakat = models.ImageField(upload_to="plakaty", null=True, blank=True)
+    likes = models.ManyToManyField(User, related_name='poj_likes')
+
+    def total_likes(self):
+        return  self.likes.count()
+
 
     def __str__(self):
         return self.film_i_rok()

@@ -3,6 +3,8 @@ from .models import Film, Comments
 import random
 from .forms import FilmForm, CommentForm
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 
 
 
@@ -22,8 +24,9 @@ def wszystkie_filmy(request):
 
 def pojedynczy(request, id):
     film = get_object_or_404(Film, pk=id)
-
+    film.likes.add(request.user.id)
     ilosc = len(Film.objects.all())
+    total_likes = film.total_likes()
     tab = []
     for e in Film.objects.all():
         tab.append(e.id)
@@ -40,7 +43,7 @@ def pojedynczy(request, id):
             form = CommentForm()
 
 
-    return render(request, 'pojedynczy.html', {'film': film, 'losowy': losowy,'ilosc': ilosc,'form': form  })
+    return render(request, 'pojedynczy.html', {'total_likes': total_likes, 'film': film, 'losowy': losowy,'ilosc': ilosc,'form': form  })
 
 @login_required()
 def nowy_film(request):

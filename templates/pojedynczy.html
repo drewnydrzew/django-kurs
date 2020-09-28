@@ -56,6 +56,10 @@
                         {% endif %}
                         <p class="card-text_p">{{ film.opis }}</p>
                     </div>
+                    <form  method="post">
+                        {% csrf_token %}
+                        <button type="submit" name="post_id" value="{{ post.id }}" class="btn btn-primary" >Like</button> - {{total_likes}}
+                    </form>
                 </div>
             </div>
             <div class="col-sm-4">
