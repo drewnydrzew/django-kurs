@@ -19,12 +19,13 @@ def wszystkie_filmy(request):
 
     return render(request, 'filmy.html', {'filmy': wszystkie, 'losowy': losowy,'ilosc': ilosc, })
 
-
-
+def likeviews(request, id):
+    film = get_object_or_404(Film, id=request.POST.get('post_id'))
+    film.likes.add(request.user.id)
+    return redirect(pojedynczy, id=film.pk)
 
 def pojedynczy(request, id):
     film = get_object_or_404(Film, pk=id)
-    film.likes.add(request.user.id)
     ilosc = len(Film.objects.all())
     total_likes = film.total_likes()
     tab = []
