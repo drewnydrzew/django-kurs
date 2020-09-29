@@ -1,6 +1,10 @@
 .left-all {
   text-align: left;
 }
+.right-all {
+  text-align: right;
+  color: white;
+}
 .center-all {
   text-align: center;
 }
@@ -9,8 +13,15 @@
     float: left;
     margin-right: 15px;
     }
+.search{
+    text-align: right;
+
+}
 
 .center_main {
     margin: auto;
     width: 50%;
+}
+.header-white {
+    color: white;
 }

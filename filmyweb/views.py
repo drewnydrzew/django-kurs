@@ -1,12 +1,10 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.views.generic import ListView
 from .models import Film, Comments
 import random
+from django.db.models import Q
 from .forms import FilmForm, CommentForm
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect
-from django.urls import reverse
-
-
 
 def wszystkie_filmy(request):
     wszystkie = Film.objects.all()
@@ -17,7 +15,7 @@ def wszystkie_filmy(request):
 
     losowy = Film.objects.get(id=(random.choice(tab)))
 
-    return render(request, 'filmy.html', {'filmy': wszystkie, 'losowy': losowy,'ilosc': ilosc, })
+    return render(request, 'filmy.html', {'filmy': wszystkie, 'losowy': losowy, 'ilosc': ilosc})
 
 def likeviews(request, id):
     film = get_object_or_404(Film, id=request.POST.get('post_id'))
@@ -77,3 +75,12 @@ def comment_remove(request, pk):
     comment = get_object_or_404(Comments, pk=pk)
     comment.delete()
     return redirect(pojedynczy, id=comment.post.pk)
+
+class SearchResultsView(ListView):
+    model = Film
+    template_name = 'search.html'
+
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        object_list = Film.objects.filter(Q(tytul__icontains=query))
+        return object_list
