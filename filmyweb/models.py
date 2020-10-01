@@ -11,7 +11,6 @@ class Film(models.Model):
     author = models.ForeignKey(User,default=1,null=True,on_delete=models.SET_NULL,)
     tytul = models.CharField(max_length=64, blank=False, unique=True)
     rok = models.PositiveSmallIntegerField(default=2000)
-    krotki_opis = models.TextField(default="", max_length=195, blank=False, null=True)
     opis = models.TextField(default="")
     premiera = models.DateField(null=True, blank=True)
     imbd_rating = models.DecimalField(max_digits=4, decimal_places=2, null=True, blank=True)

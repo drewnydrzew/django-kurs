@@ -5,7 +5,7 @@ from .models import Film, Comments
 class FilmForm(ModelForm):
     class Meta:
         model = Film
-        fields = ['tytul','krotki_opis', 'opis', 'premiera', 'rok', 'imbd_rating', 'plakat']
+        fields = ['tytul', 'opis', 'premiera', 'rok', 'imbd_rating', 'plakat']
 
 class CommentForm(ModelForm):
     class Meta:

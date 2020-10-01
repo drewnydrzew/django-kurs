@@ -34,7 +34,7 @@
       </div>
 
       <div class="alert alert-primary" role="alert">
-          Bugów: {{ilosc}} ||  Losowy Bug: <a href="{% url 'pojedynczy' losowy.id %}">{{ losowy.tytul }}</a>
+          Bugów: {{filmy|length}} ||  Losowy Bug: <a href="{% url 'pojedynczy' losowy.id %}">{{ losowy.tytul }}</a>
       </div>
   </div>
 </div>
